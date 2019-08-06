@@ -4,8 +4,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Event
 from app.forms import LoginForm, RegistrationForm, EventForm
 from app.__init__ import app
+import qrcode
+from app.config import BASE_URL
 
 #app = Flask(__name__)
+
+QR_DIR = 'app/static/qr_codes/'
+
 
 @app.route('/')
 def home():
@@ -52,6 +57,9 @@ def create_event():
         event = Event(name=form.name.data, author=current_user.username)
         db.session.add(event)
         db.session.commit()
+        qr_img = qrcode.make(BASE_URL + url_for('display_code', event_id=event.id))
+        path = QR_DIR+str(event.id) 
+        qr_img.save(path +'.png')
         flash('Event Created')
         return redirect(url_for('display_code', event_id=event.id))
     return render_template('create_event.html', title='Create Event', form=form)
