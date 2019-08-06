@@ -53,21 +53,21 @@ def create_event():
         db.session.add(event)
         db.session.commit()
         flash('Event Created')
-        return redirect(url_for('home'))
+        return redirect(url_for('display_code', event_id=event.id))
     return render_template('create_event.html', title='Create Event', form=form)
 
 @app.route('/event/<event_id>')
 @login_required
-def view_attendees():
+def view_attendees(event_id=None):
     pass
 
 @app.route('/event/<event_id>/display')
 @login_required
-def display_code():
+def display_code(event_id=None):
     pass
 
 @app.route('/event/<event_id>/checkin')
-def check_in():
+def check_in(event_id=None):
     pass
 
 
