@@ -1,8 +1,8 @@
 from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash
 from app.__init__ import *
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Event
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, EventForm
 from app.__init__ import app
 
 #app = Flask(__name__)
@@ -43,6 +43,33 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/create', methods=['GET','POST'])
+@login_required
+def create_event():
+    form = EventForm()
+    if form.validate_on_submit():
+        event = Event(name=form.name.data, author=current_user.username)
+        db.session.add(event)
+        db.session.commit()
+        flash('Event Created')
+        return redirect(url_for('home'))
+    return render_template('create_event.html', title='Create Event', form=form)
+
+@app.route('/event/<event_id>')
+@login_required
+def view_attendees():
+    pass
+
+@app.route('/event/<event_id>/display')
+@login_required
+def display_code():
+    pass
+
+@app.route('/event/<event_id>/checkin')
+def check_in():
+    pass
+
 
 @app.shell_context_processor
 def make_shell_context():
