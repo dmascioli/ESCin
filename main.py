@@ -17,7 +17,7 @@ def home():
     if current_user.is_anonymous:
         return render_template("home.html")
     else:
-        events = Event.query.filter_by(creator=current_user.username).all()
+        events = Event.query.filter_by(creator=current_user.id).all()
         return render_template("home.html", events=events)
 
 @app.route('/login', methods=['GET', 'POST'])
