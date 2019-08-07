@@ -58,7 +58,7 @@ def register():
 def create_event():
     form = EventForm()
     if form.validate_on_submit():
-        event = Event(name=form.name.data, creator=current_user.username)
+        event = Event(name=form.name.data, creator=current_user.id)
         db.session.add(event)
         db.session.commit()
         qr_img = qrcode.make(BASE_URL + url_for('check_in', event_id=event.id))
