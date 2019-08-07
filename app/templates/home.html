@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>Hi, Darren!</h1>
+{% block app_content %}
+    {% if current_user.is_anonymous %}
+    <h1>Welcome to ESCin, please sign in</h1>
+    {% else %}
+    <h1>Welcome back, {{current_user.username}}!</h1>
+    <h2>Your Events:</h2>
+    <ul class="list-group">
+        {% for event in events %}
+            <li class="list-group-item"><a href="{{url_for('view_attendees', event_id=event.id)}}">{{event.name}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}

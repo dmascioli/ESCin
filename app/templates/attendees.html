@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>{{event.name}}</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>First</th>
+                <th>Last</th>
+                <th>Pitt ID</th>
+            </tr>
+        </thead>
+        {% for checkin in event.checkins %}
+        <tr>
+            <td>{{checkin.first}}</td>
+            <td>{{checkin.last}}</td>
+            <td>{{checkin.pittid}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

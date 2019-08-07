@@ -1,0 +1,30 @@
+{% block app_content %}
+    <h1>Check In</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.first.label }}<br>
+            {{ form.first(size=32) }}<br>
+            {% for error in form.first.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.last.label }}<br>
+            {{ form.last(size=32) }}<br>
+            {% for error in form.last.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.pittid.label }}<br>
+            {{ form.pittid(size=32) }}<br>
+            {% for error in form.pittid.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        
+        <p>{{ form.submit() }}</p>
+    </form>
+    
+{% endblock %}

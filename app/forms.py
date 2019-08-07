@@ -31,3 +31,9 @@ class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[DataRequired()])
 
     submit = SubmitField('Create')
+
+class CheckinForm(FlaskForm):
+    first = StringField('First Name', validators=[DataRequired()])
+    last = StringField('Last Name', validators=[DataRequired()])
+    pittid = StringField('Pitt Email', validators=[DataRequired()])
+    submit = SubmitField('Check In')
