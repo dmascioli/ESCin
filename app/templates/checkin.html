@@ -1,4 +1,6 @@
-{% block app_content %}
+{% extends 'bootstrap/base.html' %}
+{% block content %}
+<div class="container">
     <h1>Check In</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
@@ -23,8 +25,10 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        
+
         <p>{{ form.submit() }}</p>
     </form>
-    
+</div>
+
+
 {% endblock %}
